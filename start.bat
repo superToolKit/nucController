@@ -1,4 +1,4 @@
-git pull
+git pull && echo "Software Up To Date"
 C:
 CD "C:\nucController"
 if exist venv\Scripts\ (
