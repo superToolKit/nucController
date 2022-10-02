@@ -1,4 +1,4 @@
-rem git pull
+git pull
 C:
 CD "C:\nucController"
 if exist venv\Scripts\ (
