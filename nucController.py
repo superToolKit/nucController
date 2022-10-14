@@ -20,12 +20,10 @@ def get_pictures_path():
     screen = get_screen()
 
     size_1920 = "./pictures/png/"
-    size_1333 = "./pictures/png.1333/"
+    size_1366 = "./pictures/png.1333/"
 
-    return size_1333
-
-    if screen == (1333, 768):
-        return size_1333
+    if screen == (1366, 768):
+        return size_1366
 
     if screen == (1920, 1080):
         return size_1920
