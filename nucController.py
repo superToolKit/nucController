@@ -5,19 +5,11 @@ import pyautogui
 from dotenv import load_dotenv, dotenv_values, find_dotenv, set_key
 from pathlib import Path
 
-dotenv_file = find_dotenv() # finds from a .env file
-load_dotenv(dotenv_file) # load from the .env file
-
-
-env = dotenv_values(".env")
-
 def create_env_file():
     env_file = Path('C:/nucController/.env')
     env_file.touch(exist_ok=True)
     f = open(env_file)
     # create an env file if  does not exist
-
-
 
 def get_username():
     username = os.getenv('spotname')
@@ -26,11 +18,15 @@ def get_username():
 
 def set_username(new_value):
     os.environ["spotname"] = new_value
+    dotenv_file = find_dotenv()  # finds from a .env file
+    load_dotenv(dotenv_file)  # load from the .env file
     set_key(dotenv_file, "spotname", os.environ["spotname"])
 
 
 def set_password(new_value):
     os.environ["password"] = new_value
+    dotenv_file = find_dotenv()  # finds from a .env file
+    load_dotenv(dotenv_file)  # load from the .env file
     set_key(dotenv_file, "password", os.environ["password"])
 
 
@@ -111,6 +107,8 @@ def menu():  ## Your menu design here
     print(R + '[6 or U]' + G + ' Change to UK')
     print(R + '[7 or A]' + G + ' Change to USA')
     print(R + '[8 or S]' + G + ' Print Screen Size')
+    print(R + '[9]' + G + ' Set new SSID NAME')
+    print(R + '[10]' + G + ' Set new password')
     choice = input("Enter your choice [0-8]: ")
     # print("Enter your choice [0-7]: ", end='')
     # choice = keyboard.read_key()
@@ -160,12 +158,20 @@ def menu():  ## Your menu design here
         line()
         print(get_screen())
         line()
+
+    elif choice == '9':
+        set_username(input("New SSID name:"))
+
+    elif choice == '10':
+        set_password(input("New password:"))
     menu()
 
 
 # Defining Windows
 def main():
     # start the hotspot
+    create_env_file()
+
     start_hotspot()
     # open the menu
     menu()
