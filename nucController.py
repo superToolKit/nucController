@@ -4,6 +4,8 @@ import time
 import pyautogui
 from dotenv import load_dotenv, dotenv_values, find_dotenv, set_key
 from pathlib import Path
+from typing import Union
+
 
 def create_env_file():
     env_file = Path('C:/nucController/.env')
@@ -11,27 +13,42 @@ def create_env_file():
     f = open(env_file)
     # create an env file if  does not exist
 
+
+# get environment variable from .env file
+def get_env(env_name: str):
+    """
+
+    :type env_name: String
+    """
+    dotenv_file = find_dotenv()  # finds from a .env file
+    load_dotenv(dotenv_file)  # load from the .env file
+    return os.getenv(env_name)
+
+
+# given an env_name e.g. password writes the new value to the env file
+# e.g. setenv('password', 'hello') sets the .env file to password='hello'
+def setenv(env_name: str, new_value: str):
+    os.environ[env_name] = new_value
+    dotenv_file = find_dotenv()  # finds from a .env file
+    load_dotenv(dotenv_file)  # load from the .env file
+    set_key(dotenv_file, env_name, os.environ[env_name])
+
+
 def get_username():
-    username = os.getenv('spotname')
+    username = get_env('spotname')
     return username
 
 
-def set_username(new_value):
-    os.environ["spotname"] = new_value
-    dotenv_file = find_dotenv()  # finds from a .env file
-    load_dotenv(dotenv_file)  # load from the .env file
-    set_key(dotenv_file, "spotname", os.environ["spotname"])
+def set_username(new_value: str):
+    setenv("spotname", new_value)
 
 
-def set_password(new_value):
-    os.environ["password"] = new_value
-    dotenv_file = find_dotenv()  # finds from a .env file
-    load_dotenv(dotenv_file)  # load from the .env file
-    set_key(dotenv_file, "password", os.environ["password"])
+def set_password(new_value: str):
+    setenv("password", new_value)
 
 
 def get_password():
-    password = (os.getenv('password'))
+    password = get_env('password')
     return password
 
 
@@ -110,8 +127,6 @@ def menu():  ## Your menu design here
     print(R + '[9]' + G + ' Set new SSID NAME')
     print(R + '[10]' + G + ' Set new password')
     choice = input("Enter your choice [0-10]: ")
-    # print("Enter your choice [0-7]: ", end='')
-    # choice = keyboard.read_key()
 
     if choice == '0' or choice.casefold() == 'r':  # if key 'q' is pressed :
         os.system("shutdown -r -t 30 -f")
@@ -150,6 +165,7 @@ def menu():  ## Your menu design here
         change_country(get_uk_london(), 'london')
         print("Changed to UK London.")
 
+
     elif choice == '7' or choice.casefold() == 'a':
         change_country(get_usa_lasvegas(), 'Las Vegas')
         print("Changed to Las Vegas, USA.")
@@ -167,14 +183,34 @@ def menu():  ## Your menu design here
     menu()
 
 
-# Defining Windows
-def main():
-    # start the hotspot
+# run this when the program starts
+def initialise():
+    # create an env file if it doesnt exist
     create_env_file()
+
+    username = get_username()
+    password = get_password()
+    debug = get_env('debug')
+
+
+    if username is None:
+        set_username(input('Please set a new hotspot name: '))
+
+    if password is None:
+        set_password(input('Please set a new password for the hotspot: '))
+
+    if debug is None:
+        setenv('debug', 'False')
 
     start_hotspot()
     # open the menu
     menu()
+
+
+# Defining Windows
+def main():
+    # start the hotspot
+    initialise()
 
 
 def start_hotspot():
