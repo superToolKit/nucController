@@ -117,14 +117,14 @@ def stop_hotspot():
 
 # click on the search input box for the countries
 def click_searchbox():
-    search_box = pyautogui.locateOnScreen(get_searchbox(), confidence="0.7")
+    search_box = pyautogui.locateOnScreen(get_searchbox(), confidence="0.8")
     print(search_box)
     pyautogui.moveTo(search_box)  # Moves the mouse to the coordinates of the image
     pyautogui.click()
 
 # empty the searchbox
 def clear_searchbox():
-        searchboxlocation = pyautogui.locateOnScreen(get_searchbox(), confidence="0.7")
+        searchboxlocation = pyautogui.locateOnScreen(get_searchbox(), confidence="0.8")
         pyautogui.moveTo(searchboxlocation)
         pyautogui.hotkey('ctrl', 'a')
         pyautogui.hotkey('delete')
@@ -135,7 +135,7 @@ def change_country(countryIcon: str, country: str):
     click_searchbox()
     enter_text(country)
     time.sleep(2)
-    countrylocation = pyautogui.locateOnScreen(countryIcon, confidence="0.7")
+    countrylocation = pyautogui.locateOnScreen(countryIcon, confidence="0.8")
     pyautogui.moveTo(countrylocation)
     line()
     print(countrylocation)
@@ -145,7 +145,7 @@ def change_country(countryIcon: str, country: str):
 
 # get focus on the nuc controler cmd window
 def focus_cmd():
-    terminal_window = pyautogui.locateOnScreen("./pictures/png/nuccontroller.png", confidence="0.7")
+    terminal_window = pyautogui.locateOnScreen("./pictures/png/nuccontroller.png", confidence="0.8")
     pyautogui.click(terminal_window)
 
 # enter some text
