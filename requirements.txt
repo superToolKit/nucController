@@ -11,6 +11,7 @@ PyMsgBox==1.0.9
 pyperclip==1.8.2
 PyRect==0.2.0
 PyScreeze==0.1.28
+python-dotenv==0.21.0
 pytweening==1.0.4
 simple-term-menu==1.5.0
 six==1.16.0

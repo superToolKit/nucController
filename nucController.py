@@ -1,14 +1,23 @@
 import os
-import pyautogui
 import time
+
+import pyautogui
+from dotenv import load_dotenv, dotenv_values
+
+load_dotenv()  # take environment variables from .env.
+
+
+env = dotenv_values(".env")
 
 
 def get_username():
-    return "TEST"
+    username = os.getenv('spotname')
+    return username
 
 
 def get_password():
-    return "TEST"
+    password = (os.getenv('password'))
+    return password
 
 
 def get_screen():
