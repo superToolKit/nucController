@@ -9,28 +9,42 @@ def get_username():
 def get_password():
     return "TEST"
 
+def get_screen():
+    screen = pyautogui.size()
+    return screen
+
+def get_pictures_path():
+    screen = get_screen()
+
+    if screen == (1333, 768):
+        return "./pictures/png.1333/"
+
+    if screen == (1920, 1080):
+         return "./pictures/png/"
+
+
 
 def get_searchbox():
-    return "./pictures/png/searchbox.inside.png"
+    return f'{get_pictures_path()}searchbox.inside.png'
 
 def get_india() -> str:
-    return "./pictures/png/india.png"
+    return f'{get_pictures_path()}india.png'
 
 
 def get_uk_london():
-    return "./pictures/png/uk.london.png"
+    return f'{get_pictures_path()}uk.london.png'
 
 
 def get_uk_glasgow():
-    return "./pictures/png/uk.glasgow.png"
+    return f'{get_pictures_path()}uk.glasgow.png'
 
 
 def get_usa_orlando():
-    return "./pictures/png/usa.orlando.png"
+    return f'{get_pictures_path()}usa.orlando.png'
 
 
 def get_usa_lasvegas():
-    return "./pictures/png/usa.lasvegas.png"
+    return f'{get_pictures_path()}usa.lasvegas.png'
 
 
 def line():
@@ -50,7 +64,8 @@ def menu():  ## Your menu design here
     print(R + '[5 or I]' + G + ' Change to India')
     print(R + '[6 or U]' + G + ' Change to UK')
     print(R + '[7 or A]' + G + ' Change to USA')
-    choice = input("Enter your choice [0-7]: ")
+    print(R + '[8 or S]' + G + ' Print Screen Size')
+    choice = input("Enter your choice [0-8]: ")
     # print("Enter your choice [0-7]: ", end='')
     # choice = keyboard.read_key()
 
@@ -94,6 +109,11 @@ def menu():  ## Your menu design here
     elif choice == '7' or choice.casefold() == 'a':
         change_country(get_usa_lasvegas(), 'Las Vegas')
         print("Changed to Las Vegas, USA.")
+
+    elif choice == '8' or choice.casefold() == 's':
+        line()
+        print(get_screen())
+        line()
     menu()
 
 
@@ -145,7 +165,7 @@ def change_country(countryIcon: str, country: str):
 
 # get focus on the nuc controler cmd window
 def focus_cmd():
-    terminal_window = pyautogui.locateOnScreen("./pictures/png/nuccontroller.png", confidence="0.8")
+    terminal_window = pyautogui.locateOnScreen(f'{get_pictures_path()}nuccontroller.png', confidence="0.8")
     pyautogui.click(terminal_window)
 
 # enter some text
