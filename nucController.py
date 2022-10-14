@@ -72,38 +72,58 @@ def get_pictures_path():
 
 def get_searchbox():
     searchbox = f'{get_pictures_path()}searchbox.inside.png'
-    print(searchbox)
+    if get_env('debug') == 'True':
+        print(searchbox)
     return searchbox
 
 
 def get_india() -> str:
     india = f'{get_pictures_path()}india.png'
-    print(india)
+    if get_env('debug') == 'True':
+        print(india)
     return india
 
 
 def get_uk_london():
     london = f'{get_pictures_path()}uk.london.png'
-    print(london)
+    if get_env('debug') == 'True':
+        print(london)
     return london
 
 
 def get_uk_glasgow():
     glasgow = f'{get_pictures_path()}uk.glasgow.png'
-    print(glasgow)
+    if get_env('debug') == 'True':
+        print(glasgow)
     return glasgow
 
 
 def get_usa_orlando():
     orlando = f'{get_pictures_path()}usa.orlando.png'
-    print(orlando)
+    if get_env('debug') == 'True':
+        print(orlando)
     return orlando
 
 
 def get_usa_lasvegas():
     vegas = f'{get_pictures_path()}usa.lasvegas.png'
-    print(vegas)
+    if get_env('debug') == 'True':
+        print(vegas)
     return vegas
+
+
+def get_network_icon():
+    wired_network = f'{get_pictures_path()}network.png'
+    if get_env('debug') == 'True':
+        print(wired_network)
+    return wired_network
+
+
+def get_mobilehotspot_icon():
+    hotspot = f'{get_pictures_path()}hotspot.png'
+    if get_env('debug') == 'True':
+        print(hotspot)
+    return hotspot
 
 
 def line():
@@ -147,7 +167,7 @@ def menu():  ## Your menu design here
             line()
 
     elif choice == '2':
-        start_hotspot()
+        start_hotspot_gui()
 
     elif choice == '3':
         stop_hotspot()
@@ -192,7 +212,6 @@ def initialise():
     password = get_password()
     debug = get_env('debug')
 
-
     if username is None:
         set_username(input('Please set a new hotspot name: '))
 
@@ -202,7 +221,7 @@ def initialise():
     if debug is None:
         setenv('debug', 'False')
 
-    start_hotspot()
+    start_hotspot_gui()
     # open the menu
     menu()
 
@@ -220,6 +239,20 @@ def start_hotspot():
     os.system("NETSH WLAN start hostednetwork")
 
 
+def start_hotspot_gui():
+    wired_network = pyautogui.locateOnScreen(get_network_icon(), confidence="0.90")
+    if get_env('debug') == 'True':
+        print(wired_network)
+    pyautogui.moveTo(wired_network)
+    pyautogui.click()
+    time.sleep(2)
+
+    mobile_hotspot = pyautogui.locateOnScreen(get_mobilehotspot_icon(), confidence="0.9")
+    pyautogui.moveTo(mobile_hotspot)
+    pyautogui.click()
+
+    focus_cmd()
+
 def stop_hotspot():
     os.system("netsh wlan stop hostednetwork")
 
@@ -227,7 +260,8 @@ def stop_hotspot():
 # click on the search input box for the countries
 def click_searchbox():
     search_box = pyautogui.locateOnScreen(get_searchbox(), confidence="0.9")
-    print(search_box)
+    if get_env('debug') == 'True':
+        print(search_box)
     pyautogui.moveTo(search_box)  # Moves the mouse to the coordinates of the image
     pyautogui.click()
 
