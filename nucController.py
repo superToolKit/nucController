@@ -2,17 +2,36 @@ import os
 import time
 
 import pyautogui
-from dotenv import load_dotenv, dotenv_values
+from dotenv import load_dotenv, dotenv_values, find_dotenv, set_key
+from pathlib import Path
 
-load_dotenv()  # take environment variables from .env.
+dotenv_file = find_dotenv() # finds from a .env file
+load_dotenv(dotenv_file) # load from the .env file
 
 
 env = dotenv_values(".env")
+
+def create_env_file():
+    env_file = Path('C:/nucController/.env')
+    env_file.touch(exist_ok=True)
+    f = open(env_file)
+    # create an env file if  does not exist
+
 
 
 def get_username():
     username = os.getenv('spotname')
     return username
+
+
+def set_username(new_value):
+    os.environ["spotname"] = new_value
+    set_key(dotenv_file, "spotname", os.environ["spotname"])
+
+
+def set_password(new_value):
+    os.environ["password"] = new_value
+    set_key(dotenv_file, "password", os.environ["password"])
 
 
 def get_password():
