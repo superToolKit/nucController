@@ -109,7 +109,7 @@ def menu():  ## Your menu design here
     print(R + '[8 or S]' + G + ' Print Screen Size')
     print(R + '[9]' + G + ' Set new SSID NAME')
     print(R + '[10]' + G + ' Set new password')
-    choice = input("Enter your choice [0-8]: ")
+    choice = input("Enter your choice [0-10]: ")
     # print("Enter your choice [0-7]: ", end='')
     # choice = keyboard.read_key()
 
@@ -160,10 +160,10 @@ def menu():  ## Your menu design here
         line()
 
     elif choice == '9':
-        set_username(input("New SSID name:"))
+        set_username(input("New SSID name: "))
 
     elif choice == '10':
-        set_password(input("New password:"))
+        set_password(input("New password: "))
     menu()
 
 
