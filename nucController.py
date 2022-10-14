@@ -25,27 +25,37 @@ def get_pictures_path():
 
 
 def get_searchbox():
-    return f'{get_pictures_path()}searchbox.inside.png'
+    searchbox = f'{get_pictures_path()}searchbox.inside.png'
+    print(searchbox)
+    return searchbox
 
 def get_india() -> str:
-    return f'{get_pictures_path()}india.png'
-
+    india = f'{get_pictures_path()}india.png'
+    print(india)
+    return india
 
 def get_uk_london():
-    return f'{get_pictures_path()}uk.london.png'
+    london =  f'{get_pictures_path()}uk.london.png'
+    print(london)
+    return london
 
 
 def get_uk_glasgow():
-    return f'{get_pictures_path()}uk.glasgow.png'
+    glasgow =  f'{get_pictures_path()}uk.glasgow.png'
+    print(glasgow)
+    return glasgow
 
 
 def get_usa_orlando():
-    return f'{get_pictures_path()}usa.orlando.png'
+    orlando =  f'{get_pictures_path()}usa.orlando.png'
+    print(orlando)
+    return orlando
 
 
 def get_usa_lasvegas():
-    return f'{get_pictures_path()}usa.lasvegas.png'
-
+    vegas = f'{get_pictures_path()}usa.lasvegas.png'
+    print(vegas)
+    return vegas
 
 def line():
     print("****************************************")
