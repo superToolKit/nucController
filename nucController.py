@@ -51,8 +51,10 @@ def menu():  ## Your menu design here
     print(R + '[6 or U]' + G + ' Change to UK')
     print(R + '[7 or A]' + G + ' Change to USA')
     choice = input("Enter your choice [0-7]: ")
+    # print("Enter your choice [0-7]: ", end='')
+    # choice = keyboard.read_key()
 
-    if choice == '0' or choice.casefold() == 'r':
+    if choice == '0' or choice.casefold() == 'r':  # if key 'q' is pressed :
         os.system("shutdown -r -t 30 -f")
         restart = True
         line()
