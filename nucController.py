@@ -2,6 +2,7 @@ import os
 import pyautogui
 import time
 
+
 def get_username():
     return "TEST"
 
@@ -9,19 +10,25 @@ def get_username():
 def get_password():
     return "TEST"
 
+
 def get_screen():
     screen = pyautogui.size()
     return screen
 
+
 def get_pictures_path():
     screen = get_screen()
 
+    size_1920 = "./pictures/png/"
+    size_1333 = "./pictures/png.1333/"
+
+    return size_1333
+
     if screen == (1333, 768):
-        return "./pictures/png.1333/"
+        return size_1333
 
     if screen == (1920, 1080):
-         return "./pictures/png/"
-
+        return size_1920
 
 
 def get_searchbox():
@@ -29,25 +36,27 @@ def get_searchbox():
     print(searchbox)
     return searchbox
 
+
 def get_india() -> str:
     india = f'{get_pictures_path()}india.png'
     print(india)
     return india
 
+
 def get_uk_london():
-    london =  f'{get_pictures_path()}uk.london.png'
+    london = f'{get_pictures_path()}uk.london.png'
     print(london)
     return london
 
 
 def get_uk_glasgow():
-    glasgow =  f'{get_pictures_path()}uk.glasgow.png'
+    glasgow = f'{get_pictures_path()}uk.glasgow.png'
     print(glasgow)
     return glasgow
 
 
 def get_usa_orlando():
-    orlando =  f'{get_pictures_path()}usa.orlando.png'
+    orlando = f'{get_pictures_path()}usa.orlando.png'
     print(orlando)
     return orlando
 
@@ -56,6 +65,7 @@ def get_usa_lasvegas():
     vegas = f'{get_pictures_path()}usa.lasvegas.png'
     print(vegas)
     return vegas
+
 
 def line():
     print("****************************************")
@@ -145,6 +155,7 @@ def start_hotspot():
 def stop_hotspot():
     os.system("netsh wlan stop hostednetwork")
 
+
 # click on the search input box for the countries
 def click_searchbox():
     search_box = pyautogui.locateOnScreen(get_searchbox(), confidence="0.9")
@@ -152,12 +163,14 @@ def click_searchbox():
     pyautogui.moveTo(search_box)  # Moves the mouse to the coordinates of the image
     pyautogui.click()
 
+
 # empty the searchbox
 def clear_searchbox():
-        searchboxlocation = pyautogui.locateOnScreen(get_searchbox(), confidence="0.9")
-        pyautogui.moveTo(searchboxlocation)
-        pyautogui.hotkey('ctrl', 'a')
-        pyautogui.hotkey('delete')
+    searchboxlocation = pyautogui.locateOnScreen(get_searchbox(), confidence="0.9")
+    pyautogui.moveTo(searchboxlocation)
+    pyautogui.hotkey('ctrl', 'a')
+    pyautogui.hotkey('delete')
+
 
 # change country country icon is the picture of the country and country is the text to input for search
 def change_country(countryIcon: str, country: str):
@@ -173,15 +186,18 @@ def change_country(countryIcon: str, country: str):
     pyautogui.click()
     focus_cmd()
 
+
 # get focus on the nuc controler cmd window
 def focus_cmd():
     terminal_window = pyautogui.locateOnScreen(f'{get_pictures_path()}nuccontroller.png', confidence="0.9")
     pyautogui.click(terminal_window)
 
+
 # enter some text
 def enter_text(text: str):
     clear_searchbox()
     pyautogui.write(text, interval=0.25)
+
 
 if __name__ == "__main__":
     main()
