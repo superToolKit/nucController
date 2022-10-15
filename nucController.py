@@ -221,6 +221,9 @@ def initialise():
     if debug is None:
         setenv('debug', 'False')
 
+    # start surfshark
+    time.sleep(30)
+    os.system("C:\Program Files (x86)\Surfshark\Surfshark.exe")
     start_hotspot_gui()
     # open the menu
     menu()
