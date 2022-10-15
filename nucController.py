@@ -154,7 +154,7 @@ def menu():  ## Your menu design here
     print(R + '[10]' + G + ' Set new password')
     choice = input("Enter your choice [0-10]: ")
 
-    if hotspot_status == False:
+    if get_hotspot_status() == False:
         global hotspot_status
         hotspot_status = True
         start_hotspot_gui()
