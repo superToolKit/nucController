@@ -153,6 +153,7 @@ def tile_windows():
     time.sleep(4)
     pyautogui.hotkey('enter')
     time.sleep(4)
+    os.system("cls")
     focus_cmd()
 
 
