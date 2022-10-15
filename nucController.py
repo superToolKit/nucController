@@ -6,6 +6,12 @@ from dotenv import load_dotenv, dotenv_values, find_dotenv, set_key
 from pathlib import Path
 from typing import Union
 
+import subprocess
+
+hotspot_status = False
+
+def get_hotspot_status():
+    return hotspot_status
 
 def create_env_file():
     env_file = Path('C:/nucController/.env')
@@ -148,6 +154,11 @@ def menu():  ## Your menu design here
     print(R + '[10]' + G + ' Set new password')
     choice = input("Enter your choice [0-10]: ")
 
+    if hotspot_status == False:
+        global hotspot_status
+        hotspot_status = True
+        start_hotspot_gui()
+
     if choice == '0' or choice.casefold() == 'r':  # if key 'q' is pressed :
         os.system("shutdown -r -t 30 -f")
         restart = True
@@ -222,9 +233,8 @@ def initialise():
         setenv('debug', 'False')
 
     # start surfshark
-    time.sleep(30)
-    os.system("C:\Program Files (x86)\Surfshark\Surfshark.exe")
-    start_hotspot_gui()
+    surfshark = "C:\\Program Files (x86)\\Surfshark\\Surfshark.exe"
+    subprocess.call([surfshark])
     # open the menu
     menu()
 
@@ -265,8 +275,10 @@ def start_hotspot_gui():
 
     focus_cmd()
 
+
 def stop_hotspot_gui():
     start_hotspot_gui()
+
 
 def stop_hotspot():
     os.system("netsh wlan stop hostednetwork")
