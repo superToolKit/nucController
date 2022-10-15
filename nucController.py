@@ -146,9 +146,9 @@ def click_searchbox():
 
 def tile_windows():
     pyautogui.getWindowsWithTitle("surfshark")[0].maximize()
-    time.sleep(1)
+    time.sleep(2)
     pyautogui.hotkey('win', 'left')
-    time.sleep(1)
+    time.sleep(2)
     pyautogui.hotkey('enter')
 
 
