@@ -250,7 +250,7 @@ def initialise():
     if debug is None:
         setenv('debug', 'False')
 
-    pyautogui.hotkey('win', 'left')
+    # pyautogui.hotkey('win', 'left')
 
     tile_windows()
     # open the menu
