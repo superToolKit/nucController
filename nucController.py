@@ -251,14 +251,14 @@ def start_hotspot_gui():
     pyautogui.moveTo(mobile_hotspot)
     pyautogui.click()
 
-    time.sleep(2)
+    time.sleep(1)
     # closes the wifi window
     wired_network = pyautogui.locateOnScreen(get_network_icon(), confidence="0.90")
     if get_env('debug') == 'True':
         print(wired_network)
     pyautogui.moveTo(wired_network)
     pyautogui.click()
-    time.sleep(2)
+    time.sleep(1)
 
     focus_cmd()
 
