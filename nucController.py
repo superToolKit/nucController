@@ -6,8 +6,6 @@ from dotenv import load_dotenv, dotenv_values, find_dotenv, set_key
 from pathlib import Path
 from typing import Union
 
-import subprocess
-
 hotspot_status = False
 
 def get_hotspot_status():
@@ -232,9 +230,6 @@ def initialise():
     if debug is None:
         setenv('debug', 'False')
 
-    # start surfshark
-    surfshark = "C:\\Program Files (x86)\\Surfshark\\Surfshark.exe"
-    subprocess.call([surfshark])
     # open the menu
     menu()
 
