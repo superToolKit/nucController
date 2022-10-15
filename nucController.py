@@ -144,6 +144,7 @@ def click_searchbox():
     pyautogui.moveTo(search_box)  # Moves the mouse to the coordinates of the image
     pyautogui.click()
 
+
 def tile_windows():
     pyautogui.getWindowsWithTitle("surfshark")[0].maximize()
     time.sleep(1)
@@ -172,12 +173,13 @@ def menu():  ## Your menu design here
     print(R + '[8 or S]' + G + ' Print Screen Size')
     print(R + '[9]' + G + ' Set new SSID NAME')
     print(R + '[10]' + G + ' Set new password')
-    choice = input("Enter your choice [0-10]: ")
 
     if get_hotspot_status() == False:
         global hotspot_status
         hotspot_status = True
         start_hotspot_gui()
+
+    choice = input("Enter your choice [0-10]: ")
 
     if choice == '0' or choice.casefold() == 'r':  # if key 'q' is pressed :
         os.system("shutdown -r -t 30 -f")
