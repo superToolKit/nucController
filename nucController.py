@@ -8,8 +8,10 @@ from typing import Union
 
 hotspot_status = False
 
+
 def get_hotspot_status():
     return hotspot_status
+
 
 def create_env_file():
     env_file = Path('C:/nucController/.env')
@@ -134,6 +136,28 @@ def line():
     print("****************************************")
 
 
+# click on the search input box for the countries
+def click_searchbox():
+    search_box = pyautogui.locateOnScreen(get_searchbox(), confidence="0.9")
+    if get_env('debug') == 'True':
+        print(search_box)
+    pyautogui.moveTo(search_box)  # Moves the mouse to the coordinates of the image
+    pyautogui.click()
+
+def tile_windows():
+    click_searchbox()
+    pyautogui.hotkey('win', 'left')
+    time.sleep(1)
+    pyautogui.hotkey('win', 'left')
+    time.sleep(1)
+    pyautogui.getWindowsWithTitle("cmd")[0].maximize()
+    time.sleep(1)
+    pyautogui.hotkey('win', 'left')
+    time.sleep(1)
+    pyautogui.hotkey('win', 'left')
+    time.sleep(1)
+
+
 def menu():  ## Your menu design here
     R = " "
     G = " "
@@ -230,6 +254,9 @@ def initialise():
     if debug is None:
         setenv('debug', 'False')
 
+    pyautogui.hotkey('win', 'left')
+
+    tile_windows()
     # open the menu
     menu()
 
@@ -254,11 +281,11 @@ def start_hotspot_gui():
     pyautogui.moveTo(wired_network)
     pyautogui.click()
     time.sleep(2)
-
+    # comment
     mobile_hotspot = pyautogui.locateOnScreen(get_mobilehotspot_icon(), confidence="0.9")
     pyautogui.moveTo(mobile_hotspot)
     pyautogui.click()
-
+    # comment
     time.sleep(2)
     # closes the wifi window
     wired_network = pyautogui.locateOnScreen(get_network_icon(), confidence="0.90")
@@ -267,7 +294,7 @@ def start_hotspot_gui():
     pyautogui.moveTo(wired_network)
     pyautogui.click()
     time.sleep(2)
-
+    # comment
     focus_cmd()
 
 
@@ -277,15 +304,6 @@ def stop_hotspot_gui():
 
 def stop_hotspot():
     os.system("netsh wlan stop hostednetwork")
-
-
-# click on the search input box for the countries
-def click_searchbox():
-    search_box = pyautogui.locateOnScreen(get_searchbox(), confidence="0.9")
-    if get_env('debug') == 'True':
-        print(search_box)
-    pyautogui.moveTo(search_box)  # Moves the mouse to the coordinates of the image
-    pyautogui.click()
 
 
 # empty the searchbox
