@@ -170,11 +170,11 @@ def menu():  ## Your menu design here
         start_hotspot_gui()
 
     elif choice == '3':
-        stop_hotspot()
-        start_hotspot()
+        start_hotspot_gui()
+        stop_hotspot_gui()
 
     elif choice == '4':
-        stop_hotspot()
+        stop_hotspot_gui()
 
     elif choice == '5' or choice.casefold() == 'i':
         change_country(get_india(), 'india')
@@ -251,7 +251,19 @@ def start_hotspot_gui():
     pyautogui.moveTo(mobile_hotspot)
     pyautogui.click()
 
+    time.sleep(2)
+    # closes the wifi window
+    wired_network = pyautogui.locateOnScreen(get_network_icon(), confidence="0.90")
+    if get_env('debug') == 'True':
+        print(wired_network)
+    pyautogui.moveTo(wired_network)
+    pyautogui.click()
+    time.sleep(2)
+
     focus_cmd()
+
+def stop_hotspot_gui():
+    start_hotspot_gui()
 
 def stop_hotspot():
     os.system("netsh wlan stop hostednetwork")
