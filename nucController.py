@@ -145,17 +145,11 @@ def click_searchbox():
     pyautogui.click()
 
 def tile_windows():
-    click_searchbox()
-    pyautogui.hotkey('win', 'left')
+    pyautogui.getWindowsWithTitle("surfshark")[0].maximize()
     time.sleep(1)
     pyautogui.hotkey('win', 'left')
     time.sleep(1)
-    pyautogui.getWindowsWithTitle("cmd")[0].maximize()
-    time.sleep(1)
-    pyautogui.hotkey('win', 'left')
-    time.sleep(1)
-    pyautogui.hotkey('win', 'left')
-    time.sleep(1)
+    pyautogui.hotkey('enter')
 
 
 def menu():  ## Your menu design here
