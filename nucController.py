@@ -150,6 +150,8 @@ def tile_windows():
     pyautogui.hotkey('win', 'left')
     time.sleep(2)
     pyautogui.hotkey('enter')
+    time.sleep(2)
+    focus_cmd()
 
 
 def menu():  ## Your menu design here
