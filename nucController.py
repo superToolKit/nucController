@@ -154,7 +154,6 @@ def tile_windows():
     pyautogui.hotkey('enter')
     time.sleep(4)
     os.system("cls")
-    focus_cmd()
 
 
 def menu():  ## Your menu design here
@@ -258,6 +257,7 @@ def initialise():
     tile_windows()
     # open the menu
     menu()
+    focus_cmd()
 
 
 # Defining Windows
