@@ -1,0 +1,1 @@
+schtasks /query /TN "RestartPC" >NUL 2>&1 || SCHTASKS /CREATE /SC DAILY /TN "RestartPC" /TR "C:\nucController\restart.bat" /ST 04:10

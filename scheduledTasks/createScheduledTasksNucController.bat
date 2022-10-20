@@ -1,0 +1,1 @@
+schtasks /query /TN "NucController" >NUL 2>&1 || SCHTASKS /CREATE /SC ONLOGON /TN "NucController" /TR "C:\nucController\software_update.bat" /DELAY 1
