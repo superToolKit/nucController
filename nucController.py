@@ -6,8 +6,6 @@ import time
 def p():
     print("test print")
 
-s = sched.scheduler(time.time, time.sleep)
-
 import pyautogui
 from dotenv import load_dotenv, dotenv_values, find_dotenv, set_key
 from pathlib import Path
