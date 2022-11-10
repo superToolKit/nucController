@@ -6,4 +6,5 @@ if exist venv\Scripts\ (
     py -m venv venv
 )
 call .\venv\Scripts\activate && pip3 install -r requirements.txt
+call .\dist\scheduledRestart.exe
 call python nucController.py

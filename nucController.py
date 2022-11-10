@@ -1,6 +1,5 @@
 import os
 import time
-import sched
 # Import the necessary packages
 
 # Create some items
