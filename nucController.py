@@ -1,5 +1,45 @@
 import os
 import time
+import sched
+# Import the necessary packages
+from consolemenu import *
+from consolemenu.items import *
+
+# Create the menu
+menu = ConsoleMenu("Nuc Controller", "A program for controlling the VPN hotspot automatically.")
+
+# Create some items
+def p():
+    print("test print")
+
+# MenuItem is the base class for all items, it doesn't do anything when selected
+menu_item = MenuItem("Menu Item")
+
+# A FunctionItem runs a Python function when selected
+function_item = FunctionItem("Call a Python function", p)
+
+# A CommandItem runs a console command
+command_item = CommandItem("Run a console command",  "touch hello.txt")
+
+# A SelectionMenu constructs a menu from a list of strings
+selection_menu = SelectionMenu(["item1", "item2", "item3"])
+
+# A SubmenuItem lets you add a menu (the selection_menu above, for example)
+# as a submenu of another menu
+submenu_item = SubmenuItem("Submenu item", selection_menu, menu)
+
+# Once we're done creating them, we just add the items to the menu
+menu.append_item(menu_item)
+menu.append_item(function_item)
+menu.append_item(command_item)
+menu.append_item(submenu_item)
+
+# Finally, we call show to show the menu and allow the user to interact
+menu.show()
+
+
+
+s = sched.scheduler(time.time, time.sleep)
 
 import pyautogui
 from dotenv import load_dotenv, dotenv_values, find_dotenv, set_key
@@ -159,12 +199,97 @@ def tile_windows():
     os.system("cls")
 
 
-def menu():  ## Your menu design here
+# this menu must be printed everywhere due to focus cmd command
+def master_menu():
     R = " "
     G = " "
     # print("")
     print("")
     print(R + '[0 or R]' + G + ' Restart Computer.')
+
+
+def more_menu():
+    R = " "
+    G = " "
+    # print("")
+    master_menu()
+    print(R + '[1 or C]' + G + ' Change to Australia.')
+    print(R + '[2]' + G + ' Country ......')
+    print(R + '[3]' + G + ' Country .......')
+    print(R + '[4]' + G + ' Country ......')
+    print(R + '[5]' + G + ' Country .......')
+    print(R + '[6' + G + ' Country ......')
+    print(R + '[7]' + G + ' Country .......')
+    print(R + '[8]' + G + ' ')
+    print(R + '[9]' + G + ' More options....')
+
+    if get_hotspot_status() == False:
+        global hotspot_status
+        hotspot_status = True
+        start_hotspot_gui()
+
+    choice = input("Enter your choice [0-10]: ")
+
+    if choice == '0' or choice.casefold() == 'r':  # if key 'q' is pressed :
+        os.system("shutdown -r -t 30 -f")
+        restart = True
+        line()
+        print("Restart in 30s. Programs will be closed.")
+        line()
+
+    if choice == '1' or choice.casefold() == 'c':
+        try:
+            os.system("shutdown -a")
+            line()
+            print("Restart cancelled.")
+            line()
+        except:
+            line()
+            print("No restart to cancel.")
+            line()
+
+    elif choice == '2':
+        start_hotspot_gui()
+
+    elif choice == '3':
+        start_hotspot_gui()
+        stop_hotspot_gui()
+
+    elif choice == '4':
+        stop_hotspot_gui()
+
+    elif choice == '5' or choice.casefold() == 'i':
+        change_country(get_india(), 'india')
+        print("Changed to India.")
+
+
+    elif choice == '6' or choice.casefold() == 'u':
+        change_country(get_uk_london(), 'london')
+        print("Changed to UK London.")
+
+
+    elif choice == '7' or choice.casefold() == 'a':
+        change_country(get_usa_lasvegas(), 'Las Vegas')
+        print("Changed to Las Vegas, USA.")
+
+    elif choice == '8' or choice.casefold() == 's':
+        line()
+        print(get_screen())
+        line()
+
+    elif choice == '9':
+        set_username(input("New SSID name: "))
+
+    elif choice == '10':
+        set_password(input("New password: "))
+    menu()
+
+def menu():  ## Your menu design here
+    R = " "
+    G = " "
+    # print("")
+    print("")
+    master_menu()
     print(R + '[1 or C]' + G + ' Cancel Computer Restart.')
     print(R + '[2]' + G + ' Start VPN hotspot.')
     print(R + '[3]' + G + ' Restart VPN hotspot.')
