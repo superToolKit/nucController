@@ -151,7 +151,10 @@ def click_searchbox():
 
 
 def tile_windows():
-    pyautogui.getWindowsWithTitle("cmd")[0].minimize()
+    try:
+        pyautogui.getWindowsWithTitle("cmd")[0].minimize()
+    except IndexError:
+        pyautogui.getWindowsWithTitle("Command Prompt")[0].minimize()
     time.sleep(1)
     pyautogui.getWindowsWithTitle("surfshark")[0].maximize()
     time.sleep(1)
